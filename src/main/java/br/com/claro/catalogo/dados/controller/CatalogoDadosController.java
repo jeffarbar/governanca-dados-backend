@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.claro.catalogo.dados.service.CatalogoDadosService;
 import br.com.claro.catalogo.dados.vo.CatalogoDadoVo;
+import br.com.claro.catalogo.dados.vo.ListaResponseVo;
 import br.com.claro.catalogo.dados.vo.PesquisaVo;
 import io.swagger.annotations.Api;
 
@@ -28,35 +29,35 @@ public class CatalogoDadosController extends Controller{
 	 
 	@RequestMapping(path = "/findByTabela", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByTabela(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByTabela(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoByTabela(pesquisaVo);
 	}
 	 
 	@RequestMapping(path = "/findByDefinicao", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByDefinicao(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByDefinicao(@RequestBody PesquisaVo pesquisaVo) {
 		
-		return catalogoDadosService.findCatalogoDadoByDefinicaoLike(pesquisaVo);
+		return catalogoDadosService.findCatalogoDadoByDefinicao(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findByNome", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByNome(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByNome(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoByNome(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findByBancoDado", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByBancoDado(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByBancoDado(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoByBancoDado(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findByAssunto", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByAssunto(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByAssunto(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoByAssunto(pesquisaVo);
 	}
@@ -64,21 +65,21 @@ public class CatalogoDadosController extends Controller{
 	
 	@RequestMapping(path = "/findByDominioNegocio", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findByDominioNegocio(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByDominioNegocio(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDominioNegocio(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findByDominioDados", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findDominioDados(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findDominioDados(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDominioDados(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findBySubDominioDados", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> findSubDominioDados(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findSubDominioDados(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoBySubDominioDados(pesquisaVo);
 	}
@@ -86,7 +87,7 @@ public class CatalogoDadosController extends Controller{
 	
 	@RequestMapping(path = "/find", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<CatalogoDadoVo> find(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo find(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDado(pesquisaVo);
 	}

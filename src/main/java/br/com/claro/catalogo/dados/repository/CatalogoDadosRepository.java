@@ -7,16 +7,16 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import br.com.claro.catalogo.dados.model.CatalogoDadosModel;
 public interface CatalogoDadosRepository extends ElasticsearchRepository <CatalogoDadosModel, String>{
 
-	List<CatalogoDadosModel> findByTabelaLike(String tabela);
-	List<CatalogoDadosModel> findByBancoDadoLike(String bancoDados);
-	List<CatalogoDadosModel> findByNomeLike(String nome);
-	List<CatalogoDadosModel> findByDefinicaoLike(String describeTabela);
-	List<CatalogoDadosModel> findByAssuntoLike(String assunto);
-	List<CatalogoDadosModel> findByDominioNegocioLike(String dominioNegocio);
-	List<CatalogoDadosModel> findByDominioDadosLike(String dominioDados);
-	List<CatalogoDadosModel> findBySubDominioDadosLike(String subDominioDados);
+	List<CatalogoDadosModel> findByTabelaContaining(String tabela);
+	List<CatalogoDadosModel> findByBancoDadoContaining(String bancoDados);
+	List<CatalogoDadosModel> findByNomeContaining(String nome);
+	List<CatalogoDadosModel> findByDefinicaoContaining(String describeTabela);
+	List<CatalogoDadosModel> findByAssuntoContaining(String assunto);
+	List<CatalogoDadosModel> findByDominioNegocioContaining(String dominioNegocio);
+	List<CatalogoDadosModel> findByDominioDadosContaining(String dominioDados);
+	List<CatalogoDadosModel> findBySubDominioDadosContaining(String subDominioDados);
 	
-	List<CatalogoDadosModel> findByTabelaLikeOrBancoDadoLikeOrNomeLikeOrDefinicaoLikeOrAssuntoLikeOrDominioNegocioLikeOrDominioDadosLikeOrSubDominioDadosLike(
+	List<CatalogoDadosModel> findByTabelaContainingOrBancoDadoContainingOrNomeContainingOrDefinicaoContainingOrAssuntoContainingOrDominioNegocioContainingOrDominioDadosContainingOrSubDominioDadosContaining(
 			String tabela,String bancoDados, String nome, String definicao,String assunto, 
 			String dominioNegocio, String dominioDados,String subDominioDados );
 	

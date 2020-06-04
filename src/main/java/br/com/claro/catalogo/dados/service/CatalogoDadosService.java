@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import br.com.claro.catalogo.dados.repository.CatalogoDadosRepository;
+import br.com.claro.catalogo.dados.util.StringUtil;
 import br.com.claro.catalogo.dados.vo.CatalogoDadoVo;
+import br.com.claro.catalogo.dados.vo.ListaResponseVo;
 import br.com.claro.catalogo.dados.vo.PesquisaVo;
 
 
@@ -22,71 +24,121 @@ public class CatalogoDadosService {
 	private CatalogoDadosRepository catalogoDadosRepository;
 	
 
-	public List<CatalogoDadoVo> findCatalogoDadoByTabela(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoByTabela(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByTabelaLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByTabelaContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
-	public List<CatalogoDadoVo> findCatalogoDadoByBancoDado(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoByBancoDado(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByBancoDadoLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é inválida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta =  catalogoDadosRepository.findByBancoDadoContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
-	public List<CatalogoDadoVo> findCatalogoDadoByNome(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoByNome(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByNomeLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByNomeContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
-	public List<CatalogoDadoVo> findCatalogoDadoByDefinicaoLike(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoByDefinicao(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByDefinicaoLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDefinicaoContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
-	public List<CatalogoDadoVo> findCatalogoDadoByAssunto(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoByAssunto(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByAssuntoLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByAssuntoContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 
-	public List<CatalogoDadoVo> findCatalogoDominioNegocio(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDominioNegocio(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByDominioNegocioLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDominioNegocioContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
-	public List<CatalogoDadoVo> findCatalogoDominioDados(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDominioDados(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByDominioDadosLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDominioDadosContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
 	
-	public List<CatalogoDadoVo> findCatalogoDadoBySubDominioDados(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDadoBySubDominioDados(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findBySubDominioDadosLike(pesquisaVo.getStringPesquisa())
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findBySubDominioDadosContaining(pesquisaVo.getStringPesquisa())
 			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 		
+		return new ListaResponseVo(resulta);
 	}
 	
 	
-	public List<CatalogoDadoVo> findCatalogoDado(PesquisaVo pesquisaVo){
+	public ListaResponseVo findCatalogoDado(PesquisaVo pesquisaVo){
 		
-		return catalogoDadosRepository.findByTabelaLikeOrBancoDadoLikeOrNomeLikeOrDefinicaoLikeOrAssuntoLikeOrDominioNegocioLikeOrDominioDadosLikeOrSubDominioDadosLike(
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByTabelaContainingOrBancoDadoContainingOrNomeContainingOrDefinicaoContainingOrAssuntoContainingOrDominioNegocioContainingOrDominioDadosContainingOrSubDominioDadosContaining(
 				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
 				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
 				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa())
 				.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+	
+		return new ListaResponseVo(resulta);
 	}
 	
+	private boolean isValido(PesquisaVo pesquisaVo) {
+		
+		return StringUtil.isStrEspaco(pesquisaVo.getStringPesquisa());
+	}
 }
