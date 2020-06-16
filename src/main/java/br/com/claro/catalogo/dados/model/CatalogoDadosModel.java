@@ -12,19 +12,22 @@ public class CatalogoDadosModel {
 	
 	private String bancoDado;
 	
-	private String tabela;
+	private String parentPath;
 	
-	private String nome;
+	private String name;
 	
-	private String definicao;
+	private String definition;
 	
 	private String dominioNegocio;
 	
 	private String assunto;
 	
+	private String origem;
+	
 	private String dominioDados;
 	
 	private String subDominioDados;
+
 
 	public String getId() {
 		return id;
@@ -42,28 +45,29 @@ public class CatalogoDadosModel {
 		this.bancoDado = bancoDado;
 	}
 
-	public String getTabela() {
-		return tabela;
+
+	public String getParentPath() {
+		return parentPath;
 	}
 
-	public void setTabela(String tabela) {
-		this.tabela = tabela;
+	public void setParentPath(String parentPath) {
+		this.parentPath = parentPath;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDefinicao() {
-		return definicao;
+	public String getDefinition() {
+		return definition;
 	}
 
-	public void setDefinicao(String definicao) {
-		this.definicao = definicao;
+	public void setDefinition(String definition) {
+		this.definition = definition;
 	}
 
 	public String getDominioNegocio() {
@@ -82,6 +86,14 @@ public class CatalogoDadosModel {
 		this.assunto = assunto;
 	}
 
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
 	public String getDominioDados() {
 		return dominioDados;
 	}
@@ -97,5 +109,4 @@ public class CatalogoDadosModel {
 	public void setSubDominioDados(String subDominioDados) {
 		this.subDominioDados = subDominioDados;
 	}
-
 }

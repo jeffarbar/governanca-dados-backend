@@ -31,3 +31,11 @@ curl -X PUT "elasticsearch:9200/governanca?pretty" -H 'Content-Type: application
 
 
 curl -X POST "elasticsearch:9200/governanca/catalogodados" -H 'Content-Type: application/json' -d' {"bancoDado":"RH","tabela":"FUNCIONARIO","nome":"Dicionário de Dados - Monetizacao","definicao":"Data do fim da sessao. E a data em que a sessao foi encerrada. Ex: 43678,9409722222; 43678,0486111111.","dominioNegocio":"ENGENHARIA REDE","assunto":"CLARO WIFI","dominioDados":"Banda Larga","subDominioDados":"Conexao"} '
+
+
+
+curl -X GET "elasticsearch:9200/governanca/catalogodados/_search?pretty"
+
+
+#Executar 
+docker run --name catalogo-dados-backend --link elasticsearch  --network somenetwork  -p 8092:8092 -d jeffersonfarias/catalogo-dados-backend:1.0.0

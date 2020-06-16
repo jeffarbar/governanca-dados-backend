@@ -27,32 +27,32 @@ public class CatalogoDadosController extends Controller{
 	@Qualifier("catalogoDadosService")
 	private CatalogoDadosService catalogoDadosService;
 	 
-	@RequestMapping(path = "/findByTabela", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+	@RequestMapping(path = "/findByParentPath", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody ListaResponseVo findByTabela(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByParentPath(@RequestBody PesquisaVo pesquisaVo) {
 		
-		return catalogoDadosService.findCatalogoDadoByTabela(pesquisaVo);
+		return catalogoDadosService.findCatalogoDadoByParentPath(pesquisaVo);
 	}
 	 
-	@RequestMapping(path = "/findByDefinicao", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+	@RequestMapping(path = "/findByDefinition", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody ListaResponseVo findByDefinicao(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByDefinition(@RequestBody PesquisaVo pesquisaVo) {
 		
-		return catalogoDadosService.findCatalogoDadoByDefinicao(pesquisaVo);
+		return catalogoDadosService.findCatalogoDadoByDefinition(pesquisaVo);
 	}
 	
-	@RequestMapping(path = "/findByNome", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+	@RequestMapping(path = "/findByName", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody ListaResponseVo findByNome(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByName(@RequestBody PesquisaVo pesquisaVo) {
 		
-		return catalogoDadosService.findCatalogoDadoByNome(pesquisaVo);
+		return catalogoDadosService.findCatalogoDadoByName(pesquisaVo);
 	}
 	
-	@RequestMapping(path = "/findByBancoDado", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+	@RequestMapping(path = "/findByOrigem", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody ListaResponseVo findByBancoDado(@RequestBody PesquisaVo pesquisaVo) {
+	public @ResponseBody ListaResponseVo findByOrigem(@RequestBody PesquisaVo pesquisaVo) {
 		
-		return catalogoDadosService.findCatalogoDadoByBancoDado(pesquisaVo);
+		return catalogoDadosService.findCatalogoDadoByOrigem(pesquisaVo);
 	}
 	
 	@RequestMapping(path = "/findByAssunto", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 

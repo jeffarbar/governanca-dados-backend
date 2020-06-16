@@ -11,26 +11,34 @@ public class CatalogoDadoVo {
 	public CatalogoDadoVo() {}
 	
 	public CatalogoDadoVo(CatalogoDadosModel model) {
-		BeanUtils.copyProperties(model , this);
+		BeanUtils.copyProperties(model , this);		
 	}
+	
+
+	@JsonProperty("Caminho")
+	private String parentPath;
+	
+	@JsonProperty("Nome")
+	private String name;
+	
+	@JsonProperty("Definição")
+	private String definition;
+	
+	@JsonProperty("Origem")
+	private String origem;
+	
 	
 	@JsonProperty("Banco de Dados")
 	private String bancoDado;
 	
-	@JsonProperty("Tabela")
-	private String tabela;
 	
 	@JsonProperty("Domínio Negócio")
 	private String dominioNegocio;
 	
-	@JsonProperty("Definição")
-	private String definicao;
 	
 	@JsonProperty("Assunto")
 	private String assunto;
 	
-	@JsonProperty("Nome")
-	private String nome;
 	
 	@JsonProperty("Domínio Dados")
 	private String dominioDados;
@@ -38,20 +46,44 @@ public class CatalogoDadoVo {
 	@JsonProperty("Sub Domínio Dados")
 	private String subDominioDados;
 
+	public String getParentPath() {
+		return parentPath;
+	}
+
+	public void setParentPath(String parentPath) {
+		this.parentPath = parentPath;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDefinition() {
+		return definition;
+	}
+
+	public void setDefinition(String definition) {
+		this.definition = definition;
+	}
+
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
 	public String getBancoDado() {
 		return bancoDado;
 	}
 
 	public void setBancoDado(String bancoDado) {
 		this.bancoDado = bancoDado;
-	}
-
-	public String getTabela() {
-		return tabela;
-	}
-
-	public void setTabela(String tabela) {
-		this.tabela = tabela;
 	}
 
 	public String getDominioNegocio() {
@@ -62,28 +94,12 @@ public class CatalogoDadoVo {
 		this.dominioNegocio = dominioNegocio;
 	}
 
-	public String getDefinicao() {
-		return definicao;
-	}
-
-	public void setDefinicao(String definicao) {
-		this.definicao = definicao;
-	}
-
 	public String getAssunto() {
 		return assunto;
 	}
 
 	public void setAssunto(String assunto) {
 		this.assunto = assunto;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getDominioDados() {
@@ -102,4 +118,5 @@ public class CatalogoDadoVo {
 		this.subDominioDados = subDominioDados;
 	}
 	
+
 }
