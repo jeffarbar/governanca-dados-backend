@@ -15,8 +15,9 @@ import br.com.claro.catalogo.dados.vo.PesquisaVo;
 
 
 
+
 @Service
-@Qualifier("elasticsearchService")
+@Qualifier("catalogoDadosService")
 public class CatalogoDadosService {
 
 	@Autowired
@@ -121,6 +122,31 @@ public class CatalogoDadosService {
 		return new ListaResponseVo(resulta);
 	}
 	
+	public ListaResponseVo findCatalogoDadoByLabels(PesquisaVo pesquisaVo){
+		
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByLabelsContaining(pesquisaVo.getStringPesquisa())
+			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		
+		return new ListaResponseVo(resulta);
+	}
+	
+	
+	public ListaResponseVo findCatalogoDadoByGrupoDominioDados(PesquisaVo pesquisaVo){
+		
+		if( this.isValido(pesquisaVo) ) {
+			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
+		}
+		
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByGrupoDominioDadosContaining(pesquisaVo.getStringPesquisa())
+			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		
+		return new ListaResponseVo(resulta);
+	}
+	
 	
 	public ListaResponseVo findCatalogoDado(PesquisaVo pesquisaVo){
 		
@@ -128,10 +154,11 @@ public class CatalogoDadosService {
 			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
 		}
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByParentPathContainingOrNameContainingOrDefinitionContainingOrDominioNegocioContainingOrAssuntoContainingOrOrigemContainingOrDominioDadosContainingOrSubDominioDadosContaining(
+		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByParentPathContainingOrNameContainingOrDefinitionContainingOrDominioNegocioContainingOrAssuntoContainingOrOrigemContainingOrDominioDadosContainingOrSubDominioDadosContainingOrLabelsContainingOrGrupoDominioDadosContaining(
 				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
 				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
-				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa())
+				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
+				pesquisaVo.getStringPesquisa())
 				.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
 	
 		return new ListaResponseVo(resulta);

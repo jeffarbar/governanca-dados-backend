@@ -1,8 +1,5 @@
 package br.com.claro.catalogo.dados.controller;
 
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -11,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.claro.catalogo.dados.service.CatalogoDadosService;
-import br.com.claro.catalogo.dados.vo.CatalogoDadoVo;
 import br.com.claro.catalogo.dados.vo.ListaResponseVo;
 import br.com.claro.catalogo.dados.vo.PesquisaVo;
 import io.swagger.annotations.Api;
@@ -62,6 +57,12 @@ public class CatalogoDadosController extends Controller{
 		return catalogoDadosService.findCatalogoDadoByAssunto(pesquisaVo);
 	}
 	
+	@RequestMapping(path = "/findByLabels", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+			consumes = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody ListaResponseVo findByLabels(@RequestBody PesquisaVo pesquisaVo) {
+		
+		return catalogoDadosService.findCatalogoDadoByLabels(pesquisaVo);
+	}
 	
 	@RequestMapping(path = "/findByDominioNegocio", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
 			consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -82,6 +83,13 @@ public class CatalogoDadosController extends Controller{
 	public @ResponseBody ListaResponseVo findSubDominioDados(@RequestBody PesquisaVo pesquisaVo) {
 		
 		return catalogoDadosService.findCatalogoDadoBySubDominioDados(pesquisaVo);
+	}
+	
+	@RequestMapping(path = "/findByGrupoDominioDados", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE} , 
+			consumes = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody ListaResponseVo findGrupoDominioDados(@RequestBody PesquisaVo pesquisaVo) {
+		
+		return catalogoDadosService.findCatalogoDadoByGrupoDominioDados(pesquisaVo);
 	}
 	
 	

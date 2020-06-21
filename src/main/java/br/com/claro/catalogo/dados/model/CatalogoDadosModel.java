@@ -28,6 +28,9 @@ public class CatalogoDadosModel {
 	
 	private String subDominioDados;
 
+	private String labels;
+	
+	private String grupoDominioDados;
 
 	public String getId() {
 		return id;
@@ -109,4 +112,21 @@ public class CatalogoDadosModel {
 	public void setSubDominioDados(String subDominioDados) {
 		this.subDominioDados = subDominioDados;
 	}
+
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+
+	public String getGrupoDominioDados() {
+		return grupoDominioDados;
+	}
+
+	public void setGrupoDominioDados(String grupoDominioDados) {
+		this.grupoDominioDados = grupoDominioDados;
+	}
+
 }

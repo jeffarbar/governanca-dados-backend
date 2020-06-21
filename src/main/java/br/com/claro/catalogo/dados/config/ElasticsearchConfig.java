@@ -55,4 +55,5 @@ public class ElasticsearchConfig {
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
         return new ElasticsearchTemplate(client());
     }
+    
 }

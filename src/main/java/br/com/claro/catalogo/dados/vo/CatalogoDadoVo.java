@@ -13,7 +13,6 @@ public class CatalogoDadoVo {
 	public CatalogoDadoVo(CatalogoDadosModel model) {
 		BeanUtils.copyProperties(model , this);		
 	}
-	
 
 	@JsonProperty("Caminho")
 	private String parentPath;
@@ -45,6 +44,10 @@ public class CatalogoDadoVo {
 	
 	@JsonProperty("Sub Domínio Dados")
 	private String subDominioDados;
+	
+	
+	@JsonProperty("Labels")
+	private String labels;
 
 	public String getParentPath() {
 		return parentPath;
@@ -117,6 +120,12 @@ public class CatalogoDadoVo {
 	public void setSubDominioDados(String subDominioDados) {
 		this.subDominioDados = subDominioDados;
 	}
-	
 
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
 }
