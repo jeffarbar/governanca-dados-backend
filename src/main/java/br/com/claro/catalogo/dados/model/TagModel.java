@@ -68,5 +68,13 @@ public class TagModel {
 		this.grupoDominioDados = grupoDominioDados;
 	}
 
+	@Override
+	public String toString() {
+		return "TagModel [id=" + id + ", assunto=" + assunto + ", dominioNegocio=" + dominioNegocio + ", dominioDados="
+				+ dominioDados + ", subDominioDados=" + subDominioDados + ", grupoDominioDados=" + grupoDominioDados
+				+ "]";
+	}
+
+	
 	
 }
