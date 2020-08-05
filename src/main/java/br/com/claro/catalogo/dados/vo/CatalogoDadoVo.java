@@ -11,13 +11,24 @@ public class CatalogoDadoVo {
 	public CatalogoDadoVo() {}
 	
 	public CatalogoDadoVo(CatalogoDadosModel model) {
-		BeanUtils.copyProperties(model , this);		
+		BeanUtils.copyProperties(model , this);	
+		if(this.nameTable == null) {
+			this.nameTable = this.name;
+		}
 	}
 
+	private String id;
+	
 	@JsonProperty("Caminho")
 	private String parentPath;
 	
-	@JsonProperty("Nome")
+	@JsonProperty("Nome Tabela")
+	private String nameTable;
+	
+	@JsonProperty("type")
+	private String type;
+	
+	@JsonProperty("Nome Atributo")
 	private String name;
 	
 	@JsonProperty("Definição")
@@ -48,6 +59,31 @@ public class CatalogoDadoVo {
 	
 	@JsonProperty("Labels")
 	private String labels;
+
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNameTable() {
+		return nameTable;
+	}
+
+	public void setNameTable(String nameTable) {
+		this.nameTable = nameTable;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getParentPath() {
 		return parentPath;

@@ -16,6 +16,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
+import br.com.claro.catalogo.dados.model.CatalogoDadosModel;
+
 @Configuration
 public class ElasticsearchConfig {
 
@@ -53,7 +55,7 @@ public class ElasticsearchConfig {
  
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-        return new ElasticsearchTemplate(client());
+    	return new ElasticsearchTemplate(client());
     }
     
 }

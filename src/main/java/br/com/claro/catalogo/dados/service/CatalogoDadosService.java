@@ -1,19 +1,17 @@
 package br.com.claro.catalogo.dados.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import br.com.claro.catalogo.dados.repository.CatalogoDadosRepository;
-import br.com.claro.catalogo.dados.util.StringUtil;
 import br.com.claro.catalogo.dados.vo.CatalogoDadoVo;
-import br.com.claro.catalogo.dados.vo.ListaResponseVo;
-import br.com.claro.catalogo.dados.vo.PesquisaVo;
-
-
+import br.com.claro.catalogo.dados.vo.ListaCatalogoResponseVo;
+import br.com.claro.catalogo.dados.vo.PesquisaRequestVo;
 
 
 @Service
@@ -25,147 +23,209 @@ public class CatalogoDadosService {
 	private CatalogoDadosRepository catalogoDadosRepository;
 	
 
-	public ListaResponseVo findCatalogoDadoByParentPath(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByParentPath(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByParentPathContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("parentPath", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
-	public ListaResponseVo findCatalogoDadoByOrigem(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByOrigem(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é inválida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta =  catalogoDadosRepository.findByOrigemContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("origem", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
-	public ListaResponseVo findCatalogoDadoByName(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByName(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByNameContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("name", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
-	public ListaResponseVo findCatalogoDadoByDefinition(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByDefinition(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDefinitionContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("definition", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
+
 	}
 	
-	public ListaResponseVo findCatalogoDadoByAssunto(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByAssunto(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByAssuntoContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("assunto", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 
-	public ListaResponseVo findCatalogoDominioNegocio(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDominioNegocio(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDominioNegocioContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("dominioNegocio", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
-	public ListaResponseVo findCatalogoDominioDados(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDominioDados(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByDominioDadosContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("dominioDados", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
-	}
-	
-	
-	public ListaResponseVo findCatalogoDadoBySubDominioDados(PesquisaVo pesquisaVo){
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findBySubDominioDadosContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
-		
-		return new ListaResponseVo(resulta);
-	}
-	
-	public ListaResponseVo findCatalogoDadoByLabels(PesquisaVo pesquisaVo){
-		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
-		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByLabelsContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
-		
-		return new ListaResponseVo(resulta);
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
 	
-	public ListaResponseVo findCatalogoDadoByGrupoDominioDados(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoBySubDominioDados(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByGrupoDominioDadosContaining(pesquisaVo.getStringPesquisa())
-			.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("subDominioDados", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
 		
-		return new ListaResponseVo(resulta);
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
+	}
+	
+	public ListaCatalogoResponseVo findCatalogoDadoByLabels(PesquisaRequestVo pesquisaVo){
+		
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("labels", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
+		
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
 	
-	public ListaResponseVo findCatalogoDado(PesquisaVo pesquisaVo){
+	public ListaCatalogoResponseVo findCatalogoDadoByGrupoDominioDados(PesquisaRequestVo pesquisaVo){
 		
-		if( this.isValido(pesquisaVo) ) {
-			return new ListaResponseVo(-3, "Valor da string de pesquisa é invalida, não pode espaço");
-		}
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
 		
-		List<CatalogoDadoVo> resulta = catalogoDadosRepository.findByParentPathContainingOrNameContainingOrDefinitionContainingOrDominioNegocioContainingOrAssuntoContainingOrOrigemContainingOrDominioDadosContainingOrSubDominioDadosContainingOrLabelsContainingOrGrupoDominioDadosContaining(
-				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
-				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
-				pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),pesquisaVo.getStringPesquisa(),
-				pesquisaVo.getStringPesquisa())
-				.parallelStream().map(  CatalogoDadoVo :: new ).collect(Collectors.toList());
-	
-		return new ListaResponseVo(resulta);
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.matchQuery("grupoDominioDados", pesquisaVo.getStringPesquisa())
+				.operator(Operator.AND));
+		
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+		
+		return new ListaCatalogoResponseVo(resulta);
 	}
 	
-	private boolean isValido(PesquisaVo pesquisaVo) {
+	
+	public ListaCatalogoResponseVo findCatalogoDado(PesquisaRequestVo pesquisaVo){
 		
-		return StringUtil.isStrEspaco(pesquisaVo.getStringPesquisa());
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", pesquisaVo.getType())
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.multiMatchQuery(pesquisaVo.getStringPesquisa(), 
+				  	"parentPath","name","definition","dominioNegocio","assunto",
+				  	"origem","dominioDados","subDominioDados","labels","grupoDominioDados")
+				.operator(Operator.AND));
+		
+		List<CatalogoDadoVo> resulta = new ArrayList<CatalogoDadoVo>();
+		
+		catalogoDadosRepository.search(subQuery).forEach(
+				x-> resulta.add(new CatalogoDadoVo(x) )
+			);
+	
+		return new ListaCatalogoResponseVo(resulta);
 	}
+	
+	
 }

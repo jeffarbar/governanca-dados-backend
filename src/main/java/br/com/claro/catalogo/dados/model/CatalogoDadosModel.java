@@ -10,6 +10,8 @@ public class CatalogoDadosModel {
 	@Id
 	private String id;
 	
+	private String nameTable;
+	
 	private String bancoDado;
 	
 	private String parentPath;
@@ -31,6 +33,16 @@ public class CatalogoDadosModel {
 	private String labels;
 	
 	private String grupoDominioDados;
+	
+	private String type; 
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;
@@ -55,6 +67,15 @@ public class CatalogoDadosModel {
 
 	public void setParentPath(String parentPath) {
 		this.parentPath = parentPath;
+	}
+
+	
+	public String getNameTable() {
+		return nameTable;
+	}
+
+	public void setNameTable(String nameTable) {
+		this.nameTable = nameTable;
 	}
 
 	public String getName() {

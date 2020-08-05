@@ -27,8 +27,8 @@ curl -X PUT "elasticsearch:9200/governanca?pretty" -H 'Content-Type: application
     }
 }
 '
-
-
+#Aumenta o resultado da pesquisa
+curl -X PUT "elasticsearch:9200/governanca/_settings" -H 'Content-Type: application/json' -d '{ "index" : { "max_result_window" : 5000000 } }'
 
 curl -X POST "elasticsearch:9200/governanca/catalogodados" -H 'Content-Type: application/json' -d' {"bancoDado":"RH","tabela":"FUNCIONARIO","nome":"Dicionário de Dados - Monetizacao","definicao":"Data do fim da sessao. E a data em que a sessao foi encerrada. Ex: 43678,9409722222; 43678,0486111111.","dominioNegocio":"ENGENHARIA REDE","assunto":"CLARO WIFI","dominioDados":"Banda Larga","subDominioDados":"Conexao"} '
 

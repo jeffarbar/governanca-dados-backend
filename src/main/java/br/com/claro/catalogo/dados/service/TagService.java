@@ -1,28 +1,19 @@
 package br.com.claro.catalogo.dados.service;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import org.apache.lucene.search.SearcherFactory;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
-import br.com.claro.catalogo.dados.repository.CatalogoDadosRepository;
 import br.com.claro.catalogo.dados.repository.TagRepository;
-import br.com.claro.catalogo.dados.vo.CatalogoDadoVo;
-import br.com.claro.catalogo.dados.vo.ListaResponseVo;
 import br.com.claro.catalogo.dados.vo.ListaTagResponseVo;
-
 import br.com.claro.catalogo.dados.vo.TagVo;
 
 @Service
@@ -37,13 +28,19 @@ public class TagService {
 	@Value("${elasticsearch.search.regex}")
 	private String regex;
 	
+	private String TYPE = "Entity";
 
 	public ListaTagResponseVo findTagByAssunto(){
 		
-		QueryBuilder queryBuilder = QueryBuilders.regexpQuery("assunto", regex);
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", TYPE)
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.regexpQuery("assunto", regex));
+		
 		Set<TagVo> resulta = new HashSet<TagVo>();
 		
-		tagRepository.search(queryBuilder).forEach(
+		tagRepository.search(subQuery).forEach(
 				x-> resulta.add(new TagVo(x.getAssunto()) )
 			);
 		
@@ -52,10 +49,15 @@ public class TagService {
 	
 	public ListaTagResponseVo findTagByDominioNegocio(){
 		
-		QueryBuilder queryBuilder = QueryBuilders.regexpQuery("dominioNegocio", regex);
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", TYPE)
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.regexpQuery("dominioNegocio", regex));
+		
 		Set<TagVo> resulta = new HashSet<TagVo>();
 		
-		tagRepository.search(queryBuilder).forEach(
+		tagRepository.search(subQuery).forEach(
 				x-> resulta.add(new TagVo(x.getDominioNegocio()) )
 			);
 		
@@ -64,10 +66,15 @@ public class TagService {
 	
 	public ListaTagResponseVo findTagByDominioDados(){
 		
-		QueryBuilder queryBuilder = QueryBuilders.regexpQuery("dominioDados", regex);
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", TYPE)
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.regexpQuery("dominioDados", regex));
+		
 		Set<TagVo> resulta = new HashSet<TagVo>();
 		
-		tagRepository.search(queryBuilder).forEach(
+		tagRepository.search(subQuery).forEach(
 				x-> resulta.add(new TagVo(x.getDominioDados()) )
 			);
 		
@@ -77,10 +84,15 @@ public class TagService {
 
 	public ListaTagResponseVo findTagBySubDominioDados(){
 	
-		QueryBuilder queryBuilder = QueryBuilders.regexpQuery("subDominioDados", regex);
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", TYPE)
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.regexpQuery("subDominioDados", regex));
+		
 		Set<TagVo> resulta = new HashSet<TagVo>();
 		
-		tagRepository.search(queryBuilder).forEach(
+		tagRepository.search(subQuery).forEach(
 				x-> resulta.add(new TagVo(x.getSubDominioDados()) )
 			);
 		
@@ -89,10 +101,15 @@ public class TagService {
 
 	public ListaTagResponseVo findTagByGrupoDominioDados(){
 		
-		QueryBuilder queryBuilder = QueryBuilders.regexpQuery("grupoDominioDados", regex);
+		BoolQueryBuilder subQuery = new BoolQueryBuilder();
+		
+		subQuery.must(QueryBuilders.matchQuery("type", TYPE)
+				.operator(Operator.AND));
+		subQuery.must(QueryBuilders.regexpQuery("grupoDominioDados", regex));
+		
 		Set<TagVo> resulta = new HashSet<TagVo>();
 		
-		tagRepository.search(queryBuilder).forEach(
+		tagRepository.search(subQuery).forEach(
 				x-> resulta.add(new TagVo(x.getGrupoDominioDados()) )
 			);
 		

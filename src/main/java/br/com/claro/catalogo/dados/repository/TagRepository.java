@@ -1,7 +1,6 @@
 package br.com.claro.catalogo.dados.repository;
 
 
-import java.util.List;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;

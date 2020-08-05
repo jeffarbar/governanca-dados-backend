@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.claro.catalogo.dados.service.TagService;
-import br.com.claro.catalogo.dados.vo.ListaResponseVo;
+import br.com.claro.catalogo.dados.vo.ListaCatalogoResponseVo;
 import br.com.claro.catalogo.dados.vo.ListaTagResponseVo;
-import br.com.claro.catalogo.dados.vo.PesquisaVo;
+import br.com.claro.catalogo.dados.vo.PesquisaRequestVo;
 import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/tag")
 @Api(value = "/tag", description = "Controller responsável pelos metodos das tags")
-public class TagController {
+public class TagController extends Controller{
 
 	@Autowired
 	@Qualifier("tagService")

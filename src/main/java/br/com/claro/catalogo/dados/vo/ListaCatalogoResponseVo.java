@@ -2,19 +2,19 @@ package br.com.claro.catalogo.dados.vo;
 
 import java.util.List;
 
-public class ListaResponseVo extends ResponseVo{
+public class ListaCatalogoResponseVo extends ResponseVo{
 	
-	public ListaResponseVo(int codigo, String message, List<CatalogoDadoVo> listaCatalogoDado) {
+	public ListaCatalogoResponseVo(int codigo, String message, List<CatalogoDadoVo> listaCatalogoDado) {
 		super(codigo, message);
 		this.listaCatalogoDado = listaCatalogoDado;
 	}
 	
-	public ListaResponseVo(List<CatalogoDadoVo> listaCatalogoDado) {
+	public ListaCatalogoResponseVo(List<CatalogoDadoVo> listaCatalogoDado) {
 		super();
 		this.listaCatalogoDado = listaCatalogoDado;
 	}
 	
-	public ListaResponseVo(int codigo, String message) {
+	public ListaCatalogoResponseVo(int codigo, String message) {
 		super(codigo, message);
 	}
 
